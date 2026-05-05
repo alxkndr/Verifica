@@ -39,9 +39,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_iscrizione'], $_POS
 <head>
     <title>Elenco Iscritti</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    table {
+        width: 100%;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: white;
+    }
+    form {
+        margin: 0;
+    }
+    select {
+        padding: 5px;
+    }
+    button {
+        padding: 5px 10px;
+        background-color: black;
+        color: white;
+        border: none;
+    }
+    </style>
 <body>
     <h1>Elenco Iscritti</h1>
-    <table border="1">
+    <table border=3>
         <tr>
             <th>Nome</th>
             <th>Cognome</th>

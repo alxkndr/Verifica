@@ -12,12 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "Credenziali non valide. (Username: longo, Password: verifica)";
     }
 }
+
+//pagina di login
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    </style>
 <body>
     <form method="POST">
         <label>Nome utente:</label>

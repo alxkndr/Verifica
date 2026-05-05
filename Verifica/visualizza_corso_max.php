@@ -9,6 +9,18 @@ require 'pdo.php';
 <head>
     <title>Corso con più iscritti</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    p {
+        font-size: 18px;
+    }
+    </style>
 <body>
     <h1>Corso con più iscritti</h1>
     <?php

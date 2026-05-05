@@ -10,8 +10,31 @@ if (!isset($_SESSION['loggedin'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home - Gestione Palestra</title>
+    <title>Longo Gym - Pagina Principale</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        margin: 10px 0;
+    }
+    a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>
 <body>
     <h1>Longo Gym</h1>
     <p>Seleziona una delle seguenti funzionalità:</p>

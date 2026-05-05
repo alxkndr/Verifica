@@ -16,6 +16,22 @@ $results = $pdo->query($query)->fetchAll();
 <head>
     <title>Report Corsi</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    table {
+        width: 100%;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    </style>
 <body>
     <h1>Report Corsi</h1>
     <table>

@@ -4,12 +4,14 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: login.php');
     exit;
 }
-//pagina per inserire un nuovo iscritto e associarlo a un corso
+
 require 'pdo.php';
 
-$corsi = $pdo->query("SELECT id_corso, nome_corso FROM Corsi")->fetchAll();
-
-$istruttori = $pdo->query("SELECT id_istruttore, CONCAT(nome, ' ', cognome) AS nome_completo FROM Istruttori")->fetchAll();
+$corsi = $pdo->query("
+    SELECT c.id_corso, c.nome_corso, i.nome AS nome_istruttore, i.cognome AS cognome_istruttore
+    FROM Corsi c
+    JOIN Istruttori i ON c.id_istruttore = i.id_istruttore
+")->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST['nome'];
@@ -24,15 +26,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare("INSERT INTO Iscrizioni_Corsi (id_corso, id_membro, data_iscrizione) VALUES (?, ?, NOW())");
     $stmt->execute([$id_corso, $id_membro]);
 
-    echo "<p>Iscritto aggiunt</p>";
+    echo "<p>Iscritto aggiunto con successo!</p>";
 }
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Aggiungi Iscritto</title>
+    <script>
+        function aggiornaIstruttore() {
+            const corsi = <?= json_encode($corsi) ?>;
+            const corsoSelezionato = document.querySelector('select[name="id_corso"]').value;
+            const istruttoreField = document.getElementById('istruttore');
+
+            const corso = corsi.find(corso => corso.id_corso == corsoSelezionato);
+            if (corso) {
+                istruttoreField.textContent = corso.nome_istruttore + ' ' + corso.cognome_istruttore;
+            } else {
+                istruttoreField.textContent = 'Seleziona un corso';
+            }
+        }
+    </script>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    </style>
 <body>
     <h1>Aggiungi un nuovo iscritto</h1>
     <form method="POST">
@@ -43,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" name="cognome" required>
         <br>
         <label>Corso:</label>
-        <select name="id_corso" required>
+        <select name="id_corso" onchange="aggiornaIstruttore()" required>
             <option value="">Seleziona un corso</option>
             <?php foreach ($corsi as $corso): ?>
                 <option value="<?= $corso['id_corso'] ?>"><?= htmlspecialchars($corso['nome_corso']) ?></option>
@@ -51,12 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </select>
         <br>
         <label>Istruttore:</label>
-        <select name="id_istruttore" disabled>
-            <option value="">L'istruttore è associato al corso</option>
-            <?php foreach ($istruttori as $istruttore): ?>
-                <option value="<?= $istruttore['id_istruttore'] ?>"><?= htmlspecialchars($istruttore['nome_completo']) ?></option>
-            <?php endforeach; ?>
-        </select>
+        <span id="istruttore">Seleziona un corso</span>
         <br>
         <button type="submit">Aggiungi Iscritto</button>
     </form>

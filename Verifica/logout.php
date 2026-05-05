@@ -1,3 +1,5 @@
+//file per sloggarsi
+
 <?php
 session_start();
 session_unset(); 
