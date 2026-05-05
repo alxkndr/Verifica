@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: index.php');
         exit;
     } else {
-        $error = "Credenziali non valide.";
+        $error = "Credenziali non valide. (Username: longo, Password: verifica)";
     }
 }
 ?>

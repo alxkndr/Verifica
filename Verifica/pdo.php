@@ -1,8 +1,10 @@
 <?php
 $host = 'localhost';
-$dbname = 'longo_gym';
+$dbname = 'longo_gym'; //nome del mio database
 $username = 'root';
 $password = '';
+
+//connessione al database con PDO
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
